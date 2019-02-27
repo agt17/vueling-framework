@@ -7,15 +7,10 @@ using log4net;
 
 namespace VuelingFramework.VuelingLog
 {
-    public sealed class VuelingLogger : ITargetAdapterForLogger
+    public sealed class VuelingLog4NetAdapter : ITargetAdapterForLogger
     {
-        private ILog log = LogManager.GetLogger(typeof(VuelingLogger));
-        private bool isInfoEnabled = true;
-        private bool isWarnEnabled = true;
-        private bool isDebugEnabled = true;
-        private bool isErrorEnabled = true;
-        private bool isFatalEnabled = true;
-
+        private ILog log = LogManager.GetLogger(typeof(VuelingLog4NetAdapter));
+        
         public TimeSpan ExecutionTime { get; set; }
         public int counter { get; set; }
 
@@ -31,7 +26,7 @@ namespace VuelingFramework.VuelingLog
 
         public void Exception(Exception exception, string message)
         {
-            throw new NotImplementedException();
+            log.Error(exception.Message);
         }
 
         public void Fatal(string message)
